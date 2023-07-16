@@ -1,6 +1,6 @@
 # Food-Delivering-App
 
-Developing online food ordering and delivery platform flutter iOS & Android Food Shop App like Takeaway, Uber Eats Clone App with admin web portal + Sellers App + Riders App + Users App using firebase, cloud firestore, firebase cloud storage as backend. Users can read menus, order, and pay for food from participating restaurants using this application which we will develop in this course.
+Developing online food ordering and delivery platform with flutter for Android like Takeaway, Uber Eats Clone App with Sellers App, Riders App, Users App using firebase, cloud firestore, firebase cloud storage as backend. 
 
 - Fully Functional Flutter Food Ordering & Delivering App
 - Fully Functional WEB Admin Web Portal
