@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/mainScreens/item_detail_screen.dart';
 import 'package:flutter_application_1/model/items.dart';
 
 // ignore: must_be_immutable
@@ -16,10 +17,10 @@ class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //         builder: (c) => ItemsScreen(model: widget.model)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (c) => ItemDetailsScreen(model: widget.model)));
       },
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,

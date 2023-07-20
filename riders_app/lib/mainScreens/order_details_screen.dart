@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../global/global.dart';
 import '../models/address.dart';
 import '../widgets/progress_bar.dart';
 import '../widgets/shipment_address_design.dart';
@@ -18,6 +17,7 @@ class OrderDetailsScreen extends StatefulWidget {
 class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   String orderStatus = "";
   String orderByUser = "";
+  String sellerId = "";
 
   gerOrderInfo() {
     FirebaseFirestore.instance
@@ -27,6 +27,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
         .then((DocumentSnapshot) {
       orderStatus = DocumentSnapshot.data()!["status"].toString();
       orderByUser = DocumentSnapshot.data()!["orderBy"].toString();
+      sellerId = DocumentSnapshot.data()!["sellerUID"].toString();
     });
   }
 
@@ -95,7 +96,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           thickness: 1,
                         ),
                         orderStatus == "ended"
-                            ? Image.asset("images/success.png")
+                            ? Image.asset("images/success.jpg")
                             : Image.asset("images/confirm_pick.png"),
                         const Divider(
                           thickness: 1,
@@ -114,7 +115,10 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                 ? ShipmentAddressDesign(
                                     model: Address.fromJson(snapshot.data!
                                         .data() as Map<String, dynamic>),
-                                    orderStatus: orderStatus)
+                                    orderStatus: orderStatus,
+                                    orderId: widget.orderID,
+                                    sellerId: sellerId,
+                                    orderByUser: orderByUser)
                                 : Center(
                                     child: circularProgress(),
                                   );
