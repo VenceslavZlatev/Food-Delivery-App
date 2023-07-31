@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:users_app/global/global.dart';
+import 'package:users_app/main%20screens/address_screen.dart';
+import 'package:users_app/main%20screens/history_screen.dart';
 import 'package:users_app/main%20screens/home_screen.dart';
 import 'package:users_app/main%20screens/my_orders_screen.dart';
+import 'package:users_app/main%20screens/search_screen.dart';
 
 import '../authentication/auth_screen.dart';
 
@@ -94,7 +97,12 @@ class MyDrawer extends StatelessWidget {
                     "History",
                     style: TextStyle(color: Colors.black),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (c) => const HistoryScreen()));
+                  },
                 ),
                 ListTile(
                   leading: const Icon(
@@ -105,7 +113,12 @@ class MyDrawer extends StatelessWidget {
                     "Search",
                     style: TextStyle(color: Colors.black),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (c) => const SearchScreen()));
+                  },
                 ),
                 ListTile(
                   leading: const Icon(
@@ -116,7 +129,12 @@ class MyDrawer extends StatelessWidget {
                     "Add New Address",
                     style: TextStyle(color: Colors.black),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (c) => const AddressScreen()));
+                  },
                 ),
                 ListTile(
                   leading: const Icon(

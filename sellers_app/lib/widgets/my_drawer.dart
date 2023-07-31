@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/mainScreens/earnings_screen.dart';
+import 'package:flutter_application_1/mainScreens/history_screen.dart';
 import 'package:flutter_application_1/mainScreens/home_screen.dart';
+import 'package:flutter_application_1/mainScreens/new_orders_screen.dart';
 
 import '../global/global.dart';
 import '../splashScreen/authentication/auth_screen.dart';
@@ -79,7 +82,12 @@ class MyDrawer extends StatelessWidget {
                     "My Earnings",
                     style: TextStyle(color: Colors.black),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (c) => const EarningScreen()));
+                  },
                 ),
                 ListTile(
                   leading: const Icon(
@@ -90,7 +98,10 @@ class MyDrawer extends StatelessWidget {
                     "New Orders",
                     style: TextStyle(color: Colors.black),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (c) => NewOrdersScreen()));
+                  },
                 ),
                 ListTile(
                   leading: const Icon(
@@ -101,7 +112,12 @@ class MyDrawer extends StatelessWidget {
                     "History - Orders",
                     style: TextStyle(color: Colors.black),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (c) => const HistoryScreen()));
+                  },
                 ),
                 ListTile(
                   leading: const Icon(
