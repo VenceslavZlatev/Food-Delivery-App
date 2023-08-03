@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:users_app/models/sellers.dart';
 import 'package:users_app/widgets/sellers_design.dart';
-
-import '../assistant methods/assistant_methods.dart';
 import '../models/menus.dart';
 
 class SearchScreen extends StatefulWidget {

@@ -1,6 +1,5 @@
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
-import 'package:number_inc_dec/number_inc_dec.dart';
 import 'package:users_app/widgets/app_bar.dart';
 import 'package:users_app/widgets/number_picker.dart';
 
@@ -28,15 +27,8 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.network(widget.model!.thumbnailUrl.toString()),
-          Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: NumberInputPrefabbed.roundedEdgeButtons(
-              controller: counterTextEditingController,
-              min: 1,
-              max: 9,
-              initialValue: 1,
-              buttonArrangement: ButtonArrangement.incRightDecLeft,
-            ),
+          const SizedBox(
+            height: 20,
           ),
           Padding(
             padding: const EdgeInsets.only(left: 18),
@@ -70,6 +62,10 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
             ),
           ),
           //button
+          const NumberPicker(),
+          const SizedBox(
+            height: 20,
+          ),
           Center(
             child: SizedBox(
               width: MediaQuery.of(context).size.width * 0.90,
@@ -103,8 +99,6 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
               ),
             ),
           ),
-
-          const NumberPicker(),
         ],
       ),
     );

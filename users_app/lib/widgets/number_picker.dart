@@ -19,8 +19,10 @@ class _NumberPickerState extends State<NumberPicker> {
           color: const Color(0xfff5f6fa), // Dark background color
           borderRadius: BorderRadius.circular(50.0), // Rounded corners
         ),
+        width: MediaQuery.of(context).size.width * 0.70,
         child: IntrinsicWidth(
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
                 icon: const Icon(Icons.remove),
