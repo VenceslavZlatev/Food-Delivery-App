@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:users_app/splashScreen/splash_screen.dart';
 import 'package:users_app/widgets/menus_design.dart';
 import 'package:users_app/widgets/text_widget_header.dart';
-import '../assistant methods/assistant_methods.dart';
 import '../models/menus.dart';
 import '../models/sellers.dart';
 import '../widgets/progress_bar.dart';
@@ -31,13 +29,14 @@ class _MenusScreenState extends State<MenusScreen> {
         centerTitle: true,
         automaticallyImplyLeading: true,
         leading: IconButton(
-          icon: const Icon(Icons.clear_all),
+          icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
-            clearCartNow(context);
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => const MySplashScreen()),
-                (route) => false);
+            
+            // Navigator.pushAndRemoveUntil(
+            //     context,
+            //     MaterialPageRoute(builder: (context) => const HomeScreen()),
+            //     (route) => false);
+                Navigator.pop(context);
           },
         ),
       ),

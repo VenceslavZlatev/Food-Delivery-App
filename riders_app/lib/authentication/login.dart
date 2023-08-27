@@ -1,9 +1,11 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:riders_app/global/global.dart';
 import 'package:riders_app/widgets/error_dialog.dart';
 import 'package:riders_app/widgets/loading_dialog.dart';
+import 'package:riders_app/widgets/snack_bar.dart';
 
 import '../../widgets/custom_text_field.dart';
 import '../mainScreens/home_screen.dart';
@@ -76,20 +78,27 @@ class _LoginScreenState extends State<LoginScreen> {
         .get()
         .then((snapshot) async {
       if (snapshot.exists) {
-        await sharedPreferences!.setString("uid", currentUser.uid);
-        await sharedPreferences!
-            .setString("email", snapshot.data()!["riderEmail"]);
-        await sharedPreferences!
-            .setString("name", snapshot.data()!["riderName"]);
-        await sharedPreferences!
-            .setString("photoUrl", snapshot.data()!["riderAvatarUrl"]);
+        if (snapshot.data()!["status"] == "approved") {
+          await sharedPreferences!.setString("uid", currentUser.uid);
+          await sharedPreferences!
+              .setString("email", snapshot.data()!["riderEmail"]);
+          await sharedPreferences!
+              .setString("name", snapshot.data()!["riderName"]);
+          await sharedPreferences!
+              .setString("photoUrl", snapshot.data()!["riderAvatarUrl"]);
 
-        // ignore: use_build_context_synchronously
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
-          (route) => false,
-        );
+          // ignore: use_build_context_synchronously
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
+            (route) => false,
+          );
+        } else {
+          firebaseAuth.signOut();
+          Navigator.pop(context);
+          awesomeSnack(context, "Account Blocked",
+              "Admin has blocked your account.", ContentType.failure);
+        }
       } else {
         firebaseAuth.signOut();
         // Navigator.pushAndRemoveUntil(

@@ -26,7 +26,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.network(widget.model!.thumbnailUrl.toString()),
+          Center(child: Image.network(widget.model!.thumbnailUrl.toString(),height: 300, width: 300,)),
           const SizedBox(
             height: 20,
           ),

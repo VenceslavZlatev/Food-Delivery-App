@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/global/global.dart';
@@ -5,9 +6,11 @@ import 'package:flutter_application_1/upload_screens.dart/menu_upload_screen.dar
 import 'package:flutter_application_1/widgets/info_design.dart';
 import 'package:flutter_application_1/widgets/my_drawer.dart';
 import 'package:flutter_application_1/widgets/progress_bar.dart';
+import 'package:flutter_application_1/widgets/snack_bar.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import '../model/menus.dart';
+import '../splashScreen/authentication/login.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,6 +20,28 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  restrictBlockedUsersFromUsingApp() async {
+    await FirebaseFirestore.instance
+        .collection("sellers")
+        .doc(firebaseAuth.currentUser!.uid)
+        .get()
+        .then((snapshot) {
+      if (snapshot.data()!["status"] != "approved") {
+        awesomeSnack(
+            context, "Blocked", "You have been blocked.", ContentType.warning);
+        firebaseAuth.signOut();
+        Navigator.push(
+            context, MaterialPageRoute(builder: (c) => const LoginScreen()));
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    restrictBlockedUsersFromUsingApp();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

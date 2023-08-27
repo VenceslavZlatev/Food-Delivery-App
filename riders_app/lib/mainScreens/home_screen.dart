@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:riders_app/mainScreens/earnings_screen.dart';
@@ -8,7 +9,9 @@ import 'package:riders_app/mainScreens/parcel_in_proress_screen.dart';
 
 import '../assistant methods/get_current_location.dart';
 import '../authentication/auth_screen.dart';
+import '../authentication/login.dart';
 import '../global/global.dart';
+import '../widgets/snack_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -98,13 +101,31 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  restrictBlockedUsersFromUsingApp() async {
+    await FirebaseFirestore.instance
+        .collection("riders")
+        .doc(firebaseAuth.currentUser!.uid)
+        .get()
+        .then((snapshot) {
+      if (snapshot.data()!["status"] != "approved") {
+        awesomeSnack(
+            context, "Blocked", "You have been blocked.", ContentType.warning);
+        firebaseAuth.signOut();
+        Navigator.push(
+            context, MaterialPageRoute(builder: (c) => const LoginScreen()));
+      } else {
+        UserLocation uLocation = UserLocation();
+        uLocation.getCurrentLocation();
+        getPerParcelDeliveryAmount();
+        getRiderPreviousEarnings();
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    UserLocation uLocation = UserLocation();
-    uLocation.getCurrentLocation();
-    getPerParcelDeliveryAmount();
-    getRiderPreviousEarnings();
+    restrictBlockedUsersFromUsingApp();
   }
 
   getRiderPreviousEarnings() {

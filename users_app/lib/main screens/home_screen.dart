@@ -1,12 +1,15 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:users_app/assistant%20methods/assistant_methods.dart';
+import 'package:users_app/authentication/login.dart';
 import 'package:users_app/models/sellers.dart';
 import 'package:users_app/widgets/sellers_design.dart';
 import 'package:users_app/widgets/my_drawer.dart';
 import 'package:users_app/widgets/progress_bar.dart';
+import 'package:users_app/widgets/snack_bar.dart';
 import '../global/global.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -48,9 +51,28 @@ class _HomeScreenState extends State<HomeScreen> {
     // "slider/27.jpg",
   ];
 
+  restrictBlockedUsersFromUsingApp() async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(firebaseAuth.currentUser!.uid)
+        .get()
+        .then((snapshot) {
+      if (snapshot.data()!["status"] != "approved") {
+        awesomeSnack(
+            context, "Blocked", "You have been blocked.", ContentType.warning);
+        firebaseAuth.signOut();
+        Navigator.push(
+            context, MaterialPageRoute(builder: (c) => const LoginScreen()));
+      } else {
+        clearCartNow(context);
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    restrictBlockedUsersFromUsingApp();
     clearCartNow(context);
   }
 
