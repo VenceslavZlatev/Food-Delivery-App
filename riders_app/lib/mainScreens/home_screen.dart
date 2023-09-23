@@ -27,8 +27,8 @@ class _HomeScreenState extends State<HomeScreen> {
       margin: const EdgeInsets.all(8),
       child: Container(
         decoration: index == 0 || index == 3 || index == 4
-            ? BoxDecoration(color: Colors.grey)
-            : BoxDecoration(color: Colors.red),
+            ? const BoxDecoration(color: Color.fromARGB(255, 197, 197, 197))
+            : const BoxDecoration(color: Color(0xff94b723)),
         child: InkWell(
           onTap: () {
             if (index == 0) {

@@ -22,6 +22,7 @@ class PlacedOrderScreen extends StatefulWidget {
 
 class _PlacedOrderScreenState extends State<PlacedOrderScreen> {
   String orderId = DateTime.now().millisecondsSinceEpoch.toString();
+  String orderTime = DateTime.now().millisecondsSinceEpoch.toString();
 
   addOrderDetails() {
     writeOrderDetailsForUser(
@@ -31,7 +32,7 @@ class _PlacedOrderScreenState extends State<PlacedOrderScreen> {
         "orderBy": sharedPreferences!.getString("uid"),
         "productIDs": sharedPreferences!.getStringList("userCart"),
         "paymentDetails": "Cart on Delivery",
-        "orderTime": orderId,
+        "orderTime": orderTime,
         "isSuccess": true,
         "sellerUID": widget.sellerUID,
         "riderUID": "",
@@ -45,7 +46,7 @@ class _PlacedOrderScreenState extends State<PlacedOrderScreen> {
       "orderBy": sharedPreferences!.getString("uid"),
       "productIDs": sharedPreferences!.getStringList("userCart"),
       "paymentDetails": "Cart on Delivery",
-      "orderTime": orderId,
+      "orderTime": orderTime,
       "isSuccess": true,
       "sellerUID": widget.sellerUID,
       "riderUID": "",

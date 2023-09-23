@@ -93,6 +93,9 @@ class _AllVerifiedUsersScreenState extends State<AllVerifiedUsersScreen> {
           padding: const EdgeInsets.all(20),
           itemCount: allUsers!.docs.length,
           itemBuilder: (context, i) {
+            String? photoUrl = allUsers!.docs[i].get("photoUrl");
+            String? name = allUsers!.docs[i].get("name");
+            String? email = allUsers!.docs[i].get("email");
             return Card(
               color: Colors.white,
               surfaceTintColor: Colors.white,
@@ -109,13 +112,13 @@ class _AllVerifiedUsersScreenState extends State<AllVerifiedUsersScreen> {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                               image: NetworkImage(
-                                allUsers!.docs[i].get("photoUrl"),
+                                photoUrl ?? '',
                               ),
                               fit: BoxFit.fill),
                         ),
                       ),
                       title: Text(
-                        allUsers!.docs[i].get("name"),
+                        name ?? '',
                       ),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -127,7 +130,7 @@ class _AllVerifiedUsersScreenState extends State<AllVerifiedUsersScreen> {
                             width: 20,
                           ),
                           Text(
-                            allUsers!.docs[i].get("email"),
+                            email ?? '',
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
