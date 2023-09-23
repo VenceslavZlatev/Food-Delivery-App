@@ -14,6 +14,18 @@ class SellersDesignWidget extends StatefulWidget {
 }
 
 class _SellersDesignWidgetState extends State<SellersDesignWidget> {
+  String? fullAddress;
+  @override
+  void initState() {
+    super.initState();
+
+    fullAddress = widget.model!.sellerAddress;
+
+    // Split the address by comma and take the first part
+    List<String> addressParts = fullAddress!.split(',');
+    fullAddress = addressParts[0].trim();
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -31,40 +43,42 @@ class _SellersDesignWidgetState extends State<SellersDesignWidget> {
           height: 285,
           width: MediaQuery.of(context).size.width,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Divider(
-                height: 4,
-                thickness: 3,
-                color: Colors.grey[300],
-              ),
-              Image.network(
-                widget.model!.sellerAvatarUrl!,
-                height: 220.0,
-                fit: BoxFit.cover,
+              Center(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.network(
+                    widget.model!.sellerAvatarUrl!,
+                    height: 220.0,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
               const SizedBox(
                 height: 2.0,
               ),
-              Text(
-                widget.model!.sellerName!,
-                style: const TextStyle(
-                  color: Color(0xff94b723),
-                  fontSize: 20,
-                  fontFamily: "Gilroy-Medium",
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Text(
+                  "${widget.model!.sellerName!}($fullAddress)",
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontFamily: "Gilroy-Medium",
+                  ),
                 ),
               ),
-              Text(
-                widget.model!.sellerEmail!,
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 12,
-                  fontFamily: "Gilroy-Medium",
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Text(
+                  "Phone Number: ${widget.model!.sellerPhone!}",
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12,
+                    fontFamily: "Gilroy-Medium",
+                  ),
                 ),
-              ),
-              Divider(
-                height: 4,
-                thickness: 3,
-                color: Colors.grey[300],
               ),
             ],
           ),

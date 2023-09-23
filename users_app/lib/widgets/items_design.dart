@@ -25,45 +25,56 @@ class _ItemsDesignWidgetState extends State<ItemsDesignWidget> {
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       child: Padding(
-        padding: const EdgeInsets.all(5.0),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
         child: SizedBox(
-          height: 285,
+          //height: 285,
           width: MediaQuery.of(context).size.width,
-          child: Column(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Divider(
-                height: 4,
-                thickness: 3,
-                color: Colors.grey[300],
-              ),
-              Image.network(
-                widget.model!.thumbnailUrl!,
-                height: 220.0,
-                fit: BoxFit.cover,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.model!.title!,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontFamily: "Gilroy-Medium",
+                      ),
+                    ),
+                    Text(
+                      "${widget.model!.price!}€",
+                      style: const TextStyle(
+                        color: Color(0xff94b723),
+                        fontSize: 15,
+                        fontFamily: "Gilroy-Medium",
+                      ),
+                    ),
+                    Text(
+                      widget.model!.shortInfo!,
+                      style: const TextStyle(
+                        color: Color.fromARGB(255, 133, 133, 133),
+                        fontSize: 12,
+                        fontFamily: "Gilroy",
+                      ),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(
-                height: 2.0,
+                width: 15,
               ),
-              Text(
-                widget.model!.title!,
-                style: const TextStyle(
-                  color: Color(0xff94b723),
-                  fontSize: 20,
-                  fontFamily: "Gilroy-Medium",
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.network(
+                  widget.model!.thumbnailUrl!,
+                  height: 100.0,
+                  width: 100,
+                  fit: BoxFit.cover,
                 ),
-              ),
-              Text(
-                widget.model!.shortInfo!,
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 12,
-                  fontFamily: "Gilroy-Medium",
-                ),
-              ),
-              Divider(
-                height: 4,
-                thickness: 3,
-                color: Colors.grey[300],
               ),
             ],
           ),

@@ -5,15 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:users_app/assistant%20methods/assistant_methods.dart';
 import 'package:users_app/authentication/login.dart';
+import 'package:users_app/models/items.dart';
 import 'package:users_app/models/sellers.dart';
 import 'package:users_app/widgets/sellers_design.dart';
 import 'package:users_app/widgets/my_drawer.dart';
 import 'package:users_app/widgets/progress_bar.dart';
 import 'package:users_app/widgets/snack_bar.dart';
 import '../global/global.dart';
+import '../widgets/app_bar.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final Items? model;
+  const HomeScreen({super.key, this.model});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -81,15 +84,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          sharedPreferences!.getString("name")!,
-          style: const TextStyle(fontFamily: "Gilroy"),
-        ),
-        centerTitle: true,
-        automaticallyImplyLeading: true,
-      ),
-      drawer: MyDrawer(),
+      appBar: MyAppBar(),
+      drawer: const MyDrawer(),
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
@@ -108,9 +104,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             margin: const EdgeInsets.symmetric(horizontal: 1.0),
                             child: Padding(
                               padding: const EdgeInsets.all(4.0),
-                              child: Image.asset(
-                                index,
-                                fit: BoxFit.fill,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Image.asset(
+                                  index,
+                                  fit: BoxFit.fill,
+                                ),
                               ),
                             ),
                           );
@@ -159,7 +158,15 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       );
                     }).toList(),
-                  )
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Text(
+                    "All Menus",
+                    style: TextStyle(fontFamily: "Gilroy", fontSize: 20),
+                  ),
+                  const Divider()
                 ],
               ),
             ),

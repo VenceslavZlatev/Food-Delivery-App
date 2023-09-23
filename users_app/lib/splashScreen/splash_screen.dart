@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-
 import '../authentication/auth_screen.dart';
 import '../global/global.dart';
 import '../main screens/home_screen.dart';
@@ -57,7 +56,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
                       fontFamily: "Gilroy",
                       letterSpacing: 3),
                 ),
-              )
+              ),
             ],
           ),
         ),

@@ -31,12 +31,11 @@ class _MenusScreenState extends State<MenusScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {
-            
             // Navigator.pushAndRemoveUntil(
             //     context,
             //     MaterialPageRoute(builder: (context) => const HomeScreen()),
             //     (route) => false);
-                Navigator.pop(context);
+            Navigator.pop(context);
           },
         ),
       ),
@@ -76,6 +75,7 @@ class _MenusScreenState extends State<MenusScreen> {
                       itemBuilder: (context, index) {
                         Menus model = Menus.fromJson(snapshot.data!.docs[index]
                             .data()! as Map<String, dynamic>);
+
                         return MenusDesignWidget(
                           model: model,
                           context: context,
