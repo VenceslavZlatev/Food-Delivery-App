@@ -93,11 +93,12 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       fontFamily: "Gilroy", fontWeight: FontWeight.normal),
                 ),
                 Text(
-                  "Order at: ${DateFormat("dd/MM/yyyy - hh:mm aa").format(DateTime.fromMillisecondsSinceEpoch(int.parse(dataMap["orderTime"])))}",
+                  "Order at: ${dataMap["orderTime"] != null && dataMap["orderTime"].isNotEmpty ? DateFormat("dd/MM/yyyy - hh:mm aa").format(DateTime.fromMillisecondsSinceEpoch(int.tryParse(dataMap["orderTime"]) ?? 0)) : 'Invalid Timestamp'}",
                   style: const TextStyle(
-                      fontFamily: "Gilroy",
-                      fontWeight: FontWeight.normal,
-                      color: Colors.grey),
+                    fontFamily: "Gilroy",
+                    fontWeight: FontWeight.normal,
+                    color: Colors.grey,
+                  ),
                 ),
                 const Divider(
                   thickness: 1,

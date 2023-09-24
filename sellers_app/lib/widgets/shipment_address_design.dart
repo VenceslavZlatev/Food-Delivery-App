@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../model/address.dart';
 
@@ -15,6 +16,13 @@ class ShipmentAddressDesign extends StatelessWidget {
       this.orderId,
       this.sellerId,
       this.orderByUser});
+
+  confirmedParcelShipment(BuildContext context, String getOrderID,
+      String sellerId, String purchaserId) {
+    FirebaseFirestore.instance.collection("orders").doc(getOrderID).update({
+      "status": "packed",
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +103,11 @@ class ShipmentAddressDesign extends StatelessWidget {
                         shape: const RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10)))),
-                    onPressed: () {},
+                    onPressed: () {
+                      confirmedParcelShipment(
+                          context, orderId!, sellerId!, orderByUser!);
+                      Navigator.pop(context);
+                    },
                     child: const Text(
                       "Order Packing - Done",
                       style: TextStyle(
